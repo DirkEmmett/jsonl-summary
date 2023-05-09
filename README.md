@@ -20,10 +20,14 @@ Output is one JSON object with sorted keys:
 - `records`: the total number of nonblank JSON records.
 - `types`: counts for `null`, `boolean`, `number`, `string`, `array`, and `object`,
   including zero counts. Booleans are not numbers.
+- `fields`: presence counts for each top-level object key. A key counts once per
+  object, even when repeated in its JSON text. Nested keys and objects inside
+  arrays do not count. A null-valued field still counts as present.
 
 The program reads one line at a time and keeps no record history. Memory depends
-on the largest line and its parsed value, not the number of records. Numbers are
-classified without converting their magnitude; very large numbers are supported.
+on the largest line and its parsed value, plus the number of distinct top-level
+keys. Numbers are classified without converting their magnitude; very large
+numbers are supported.
 
 Malformed JSON, including `NaN`, `Infinity`, and `-Infinity`, produces an error
 on stderr naming the physical line number and exits with status 2. File and

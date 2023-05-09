@@ -8,6 +8,7 @@ import sys
 def summarize(lines):
     counts = dict.fromkeys(("null", "boolean", "number", "string", "array", "object"), 0)
     records = 0
+    fields = {}
     for line_number, line in enumerate(lines, 1):
         if not line.strip():
             continue
@@ -21,8 +22,11 @@ def summarize(lines):
         except (ValueError, RecursionError) as error:
             raise ValueError(f"line {line_number}: {error}") from None
         counts[value_type(value)] += 1
+        if isinstance(value, dict):
+            for key in value:
+                fields[key] = fields.get(key, 0) + 1
         records += 1
-    return {"records": records, "types": counts}
+    return {"records": records, "types": counts, "fields": fields}
 
 
 def value_type(value):
