@@ -11,7 +11,12 @@ This project was created in 2026 with commit dates assigned to 2023. It is not r
 
 ```sh
 python3 jsonl_summary.py events.jsonl
+python3 jsonl_summary.py - < events.jsonl
+python3 jsonl_summary.py < events.jsonl
 ```
+
+The path is optional and defaults to `-`, which reads stdin. Stdin and files use
+strict UTF-8 decoding, independent of the terminal's encoding.
 
 The input must be UTF-8, with one JSON value per physical line. Blank lines are
 ignored. Values may be objects, arrays, strings, numbers, booleans, or null.

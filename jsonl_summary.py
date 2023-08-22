@@ -1,6 +1,7 @@
 """Count JSON Lines records without keeping them in memory."""
 
 import argparse
+import io
 import json
 import sys
 
@@ -54,10 +55,17 @@ def count_number(token):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("path", help="UTF-8 JSON Lines file")
+    parser.add_argument(
+        "path", nargs="?", default="-", help="UTF-8 JSON Lines file, or - for stdin (default)"
+    )
     args = parser.parse_args(argv)
     try:
-        with open(args.path, encoding="utf-8") as source:
+        source = (
+            io.TextIOWrapper(sys.stdin.buffer, encoding="utf-8", errors="strict")
+            if args.path == "-"
+            else open(args.path, encoding="utf-8")
+        )
+        with source:
             result = summarize(source)
     except (OSError, UnicodeError, ValueError) as error:
         print(f"jsonl-summary: {args.path}: {error}", file=sys.stderr)
