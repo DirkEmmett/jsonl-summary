@@ -3,10 +3,6 @@
 A Python 3.9+ standard-library CLI for counting JSON Lines records and their types.
 No installation or dependencies are required.
 
-## Provenance
-
-This project was created in 2026 with commit dates assigned to 2023. It is not recovered historical source or commit history.
-
 ## Usage
 
 ```sh
