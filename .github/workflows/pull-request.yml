@@ -1,0 +1,13 @@
+name: Pull request check
+
+on:
+  pull_request:
+
+permissions: {}
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Confirm workflow ran
+        run: echo "Pull request workflow ran."
