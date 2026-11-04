@@ -68,6 +68,8 @@ printf '%s\n' '{}' '' 'NaN' | python3 jsonl_summary.py
 
 This exits 2, writes nothing to stdout, and writes this error to stderr:
 
+This exits 3, writes nothing to stdout, and writes this error to stderr:
+
 ```text
 jsonl-summary: -: line 3: invalid JSON constant NaN
 ```
