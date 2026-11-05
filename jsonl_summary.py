@@ -1,4 +1,4 @@
-"""Count JSON Lines records without keeping them in memory."""
+"""Count JSON Lines re456456cords without keeping them in memory."""
 
 import argparse
 import io
